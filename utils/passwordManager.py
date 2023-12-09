@@ -1,6 +1,6 @@
 import bcrypt
 
-class PassMaster:
+class PasswordManager:
     @staticmethod
     def hashed_senha(senha):
         return bcrypt.hashpw(

@@ -1,19 +1,18 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from models.models import User
-from services.passmaster import PassMaster
+from utils.passwordManager import PasswordManager
 
 class UserRepository:
     def __init__(self, user):
         engine = create_engine('sqlite:///database.db')
         Session = sessionmaker(bind=engine)
         self.session = Session()
-
         self.user = user
 
 
     def create(self):
-        self.user.senha = PassMaster.hashed_senha(self.user.senha)
+        self.user.senha = PasswordManager.hashed_senha(self.user.senha)
         self.session.add(self.user)
         self.session.commit()
         user_dict = {
@@ -32,7 +31,7 @@ class UserRepository:
         if self.user.email is not None:
             user.email = self.user.email
         if self.user.senha:
-            user.senha = PassMaster.hashed_senha(self.user.senha)
+            user.senha = PasswordManager.hashed_senha(self.user.senha)
 
         self.session.commit()
 

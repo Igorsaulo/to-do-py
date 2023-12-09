@@ -7,3 +7,4 @@ def init_app(app):
     api.init_app(app)
     import_module('controllers.tarefaController')
     import_module('controllers.userController')
+    import_module('controllers.authController')
