@@ -3,6 +3,16 @@ from importlib import import_module
 
 api = Api()
 
+api.authorizations = {
+    'Bearer Token': {
+        'type': 'apiKey',
+        'in': 'header',
+        'name': 'Authorization'
+    }
+}
+api.security = 'Bearer Token'
+
+
 def init_app(app):
     api.init_app(app)
     import_module('controllers.tarefaController')
